@@ -12,9 +12,4 @@ abstract class CallBack {
       {required String endPoint,
       required Method method,
       required Map<String, dynamic> map});
-
-  Future<dynamic> tokenBasedDownload(
-      {required String endPoint,
-      required Method method,
-      required Map<String, dynamic> map});
 }

@@ -12,7 +12,7 @@ class SplashscreenView extends GetView<SplashscreenController> {
   const SplashscreenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    Timer(Duration(seconds: 2), () {
       Get.offNamed(Routes.LOGINSCREEN);
     });
     return Scaffold(

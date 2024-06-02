@@ -1,4 +1,5 @@
 import 'package:dokan/api/custom_widgets.dart';
+import 'package:dokan/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -183,10 +184,15 @@ class LoginscreenView extends GetView<LoginscreenController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "Create new account",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.SIGNUPSCREEN);
+                      },
+                      child: Text(
+                        "Create new account",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
                     ),
                     SizedBox(
                       height: 20,

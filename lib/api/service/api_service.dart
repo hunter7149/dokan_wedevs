@@ -9,8 +9,8 @@ enum Method { POST, GET, PUT, DELETE, PATCH }
 const BASE_URL =
 //LOCAL//
     kDebugMode
-        ? 'http://182.160.114.100:5003/'
-        : 'http://182.160.114.100:5001/';
+        ? 'https://apptest.dokandemo.com/wp-json/'
+        : 'https://apptest.dokandemo.com/wp-json/';
 
 //LIVE//
 // 'http://182.160.114.100:7171/dp/';
@@ -49,114 +49,6 @@ class ApiService extends GetxService {
       print('ERROR[${err.response?.statusCode}]');
       return handler.next(err);
     }));
-  }
-
-  // Future<Map<String, dynamic>> request(
-  //     String url, Method method, Map<String, dynamic>? params) async {
-  //   print("requested params -> ${params}");
-  //   Response response;
-  //   try {
-  //     if (method == Method.POST) {
-  //       response = await _dio.post(url, data: params);
-  //     } else if (method == Method.DELETE) {
-  //       response = await _dio.delete(url);
-  //     } else if (method == Method.PATCH) {
-  //       response = await _dio.patch(url);
-  //     } else {
-  //       response = await _dio.get(
-  //         url,
-  //         queryParameters: params,
-  //       );
-  //     }
-  //     print("response status code -> ${response.statusCode}");
-  //     if (response.statusCode == 200) {
-  //       return response.data;
-  //     } else if (response.statusCode == 422) {
-  //       return response.data;
-  //     } else if (response.statusCode == 401) {
-  //       throw Exception("Unauthorized");
-  //     } else if (response.statusCode == 500) {
-  //       throw Exception("Server Error");
-  //     } else {
-  //       throw Exception("Something Went Wrong");
-  //     }
-  //   } on SocketException catch (e) {
-  //     throw Exception("No Internet Connection -> $e");
-  //   } on FormatException {
-  //     throw Exception("Bad Response Format!");
-  //   } on DioError catch (e) {
-  //     // throw Exception(e.response?.data);
-  //     if (e.response != null && e.response!.data != null) {
-  //       if (e.response!.data.toString().contains('<html><head>')) {
-  //         throw Exception("Something Went Wrong");
-  //       } else if (e.response!.data is List) {
-  //         return (e.response!.data as List).first;
-  //       } else if (e.response!.data is Map) {
-  //         return e.response!.data;
-  //       } else {
-  //         throw Exception("Unexpected response format");
-  //       }
-  //     } else {
-  //       throw Exception("Something Went Wrong");
-  //     }
-  //   } catch (e) {
-  //     print("error $e");
-  //     throw Exception("Something Went Wrong");
-  //   }
-  // }
-
-  Future<Map<String, dynamic>> uploadImage(
-      String url, File imageFile, String? token) async {
-    try {
-      FormData formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(imageFile.path,
-            // filename: '${imageFile.path.split('/').last}'),
-            filename: '${imageFile.path.split('/').last}'),
-      });
-
-      Response response = await _dio.post(
-        url,
-        data: formData,
-        options: Options(
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            if (token != null) 'Authorization': 'Bearer $token',
-          },
-        ),
-      );
-
-      print("response status code -> ${response.statusCode}");
-
-      // Handle successful response (status code 200)
-      if (response.statusCode == 200) {
-        if (response.data is Map) {
-          return response.data;
-        } else {
-          throw Exception("Unexpected response format");
-        }
-      }
-
-      // Handle other status codes
-      if (response.statusCode == 422) {
-        return response.data;
-      } else if (response.statusCode == 401) {
-        throw Exception("Unauthorized");
-      } else if (response.statusCode == 500) {
-        throw Exception("Server Error");
-      } else {
-        throw Exception("Something Went Wrong");
-      }
-    } on DioError catch (e) {
-      print(e);
-      throw Exception("Dio Error: ${e.message}");
-    } on SocketException catch (e) {
-      throw Exception("No Internet Connection -> $e");
-    } on FormatException {
-      throw Exception("Bad Response Format!");
-    } on Exception catch (e) {
-      print(e);
-      throw Exception("Something went wrong!");
-    }
   }
 
   Future<Map<String, dynamic>> request(
@@ -207,49 +99,6 @@ class ApiService extends GetxService {
       } else {
         throw Exception("Something Went Wrong");
       }
-    } on SocketException catch (e) {
-      throw Exception("No Internet Connection -> $e");
-    } on FormatException {
-      throw Exception("Bad Response Format!");
-    } on Exception catch (e) {
-      print(e);
-      throw Exception("Something went wrong!");
-    }
-  }
-
-  Future<Uint8List> downloadFile(String url, Method method,
-      Map<String, dynamic>? params, String? token) async {
-    try {
-      Response<List<int>> response = await _dio.post(
-        url,
-        data: params,
-        options: Options(
-          responseType: ResponseType.bytes,
-          headers: {
-            'Content-Type': 'application/json',
-            if (token != null) 'Authorization': 'Bearer $token',
-          },
-        ),
-      );
-
-      print("response status code -> ${response.statusCode}");
-
-      // Handle successful response (status code 200)
-      if (response.statusCode == 200) {
-        return Uint8List.fromList(response.data!);
-      }
-
-      // Handle other status codes
-      if (response.statusCode == 401) {
-        throw Exception("Unauthorized");
-      } else if (response.statusCode == 500) {
-        throw Exception("Server Error");
-      } else {
-        throw Exception("Something Went Wrong");
-      }
-    } on DioError catch (e) {
-      print(e);
-      throw Exception("Dio Error: ${e.message}");
     } on SocketException catch (e) {
       throw Exception("No Internet Connection -> $e");
     } on FormatException {
