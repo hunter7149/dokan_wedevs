@@ -1,9 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginscreenController extends GetxController {
-  //TODO: Implement LoginscreenController
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  RxBool isObsecure = true.obs;
+  obsecureUpdater() {
+    isObsecure.value = !isObsecure.value;
+    update();
+  }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +24,4 @@ class LoginscreenController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
