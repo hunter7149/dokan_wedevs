@@ -18,6 +18,17 @@ abstract class Providers implements CallBack {
   }
 
   @override
+  Future<dynamic> commonApiCallwithContentTypeChanged(
+      {required String endPoint,
+      required Method method,
+      required Map<String, dynamic> map}) async {
+    Map<String, dynamic> finalMap = map;
+
+    return await ApiService(contentTypechanged: true)
+        .request(endPoint, method, map);
+  }
+
+  @override
   Future<dynamic> tokenBaseApi(
       {required String endPoint,
       required Method method,

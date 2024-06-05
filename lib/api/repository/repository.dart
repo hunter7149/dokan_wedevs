@@ -9,4 +9,11 @@ class Repository extends Providers {
       await commonApiCall(
               endPoint: AppUrl.signup, method: Method.POST, map: map)
           .then((value) => value);
+
+  Future<dynamic> requestLogin({required Map<String, dynamic> map}) async =>
+      await commonApiCallwithContentTypeChanged(
+          endPoint: AppUrl.userLogin +
+              "?username=${map['username']}&password=${map['password']}",
+          method: Method.POST,
+          map: {}).then((value) => value);
 }

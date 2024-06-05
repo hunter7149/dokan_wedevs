@@ -12,4 +12,10 @@ abstract class CallBack {
       {required String endPoint,
       required Method method,
       required Map<String, dynamic> map});
+
+  ///only body
+  Future<dynamic> commonApiCallwithContentTypeChanged(
+      {required String endPoint,
+      required Method method,
+      required Map<String, dynamic> map});
 }

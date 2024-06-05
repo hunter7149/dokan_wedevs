@@ -1,6 +1,7 @@
 import 'package:dokan/api/custom_widgets.dart';
 import 'package:dokan/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -123,17 +124,36 @@ class LoginscreenView extends GetView<LoginscreenController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Color(0xffF75F55),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          "Login",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
+                    Obx(
+                      () => controller.isLogingIn.value
+                          ? Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  color: Color(0xffF75F55),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                  child: SpinKitThreeBounce(
+                                color: Colors.red,
+                              )),
+                            )
+                          : ZoomTapAnimation(
+                              onTap: () {
+                                controller.requestLogin();
+                              },
+                              child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffF75F55),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ),
                     ),
                     SizedBox(
                       height: 20,

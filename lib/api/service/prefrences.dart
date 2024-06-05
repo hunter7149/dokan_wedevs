@@ -5,6 +5,7 @@ class Pref {
 
   static var token = 'login_token_dokan';
   static var USER_ID = 'user_id_dokan';
+  static var userName = 'username_dokan';
 
   static void writeData({required String key, required dynamic value}) =>
       box.write(key, value);

@@ -20,17 +20,19 @@ class ApiService extends GetxService {
   late Dio _dio;
 
   //this is for header
-  static header({String? token}) => {
-        "Content-Type": 'application/json',
+  static header({String? token, bool? contentTypechanged}) => {
+        "Content-Type": contentTypechanged == true
+            ? 'application/x-www-form-urlencoded'
+            : 'application/json',
         "Accept": 'application/json',
         if (token != null) 'Authorization': 'Bearer $token',
       };
 
-  ApiService({String? token}) {
+  ApiService({String? token, bool? contentTypechanged}) {
     print("Base URL ------------>${BASE_URL}");
     _dio = Dio(BaseOptions(
       baseUrl: BASE_URL,
-      headers: header(token: token),
+      headers: header(token: token, contentTypechanged: contentTypechanged),
       connectTimeout: CONNECTION_TIMEOUT,
       receiveTimeout: CONNECTION_TIMEOUT,
     ));
