@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-import '../modules/accountscreen/bindings/accountscreen_binding.dart';
-import '../modules/accountscreen/views/accountscreen_view.dart';
-import '../modules/dashboard/bindings/dashboard_binding.dart';
-import '../modules/dashboard/views/dashboard_view.dart';
+// import '../modules/accountscreen/bindings/accountscreen_binding.dart';
+import '../modules/home/views/accountscreen_view.dart';
+// import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/home/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/loginscreen/bindings/loginscreen_binding.dart';
@@ -44,12 +44,12 @@ class AppPages {
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
-      binding: DashboardBinding(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: _Paths.ACCOUNTSCREEN,
       page: () => const AccountscreenView(),
-      binding: AccountscreenBinding(),
+      binding: HomeBinding(),
     ),
   ];
 }
