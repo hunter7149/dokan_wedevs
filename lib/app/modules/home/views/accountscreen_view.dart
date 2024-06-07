@@ -9,14 +9,26 @@ class AccountscreenView extends GetView<AccountscreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AccountscreenView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'AccountscreenView is working',
-          style: TextStyle(fontSize: 20),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.construction_outlined,
+              size: 80,
+              color: Colors.orange.shade500,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'This feature is under development',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
         ),
       ),
     );

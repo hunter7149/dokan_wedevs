@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 class DashboardController extends GetxController {
-  RxList<dynamic> itemList = <dynamic>[
+  List<dynamic> itemList = <dynamic>[
     {
       "id": 2801,
       "name": "weCare book",
@@ -83,7 +87,7 @@ class DashboardController extends GetxController {
           "date_modified": "2021-09-13T15:58:24",
           "date_modified_gmt": "2021-09-13T03:58:24",
           "src":
-              "https:\/\/mobileapp.getdokan.com\/wp-content\/uploads\/2021\/09\/wecare.png",
+              "https://mobileapp.getdokan.com/wp-content/uploads/2021/09/wecare.png",
           "name": "wecare",
           "alt": "",
           "position": 0
@@ -1140,11 +1144,113 @@ class DashboardController extends GetxController {
         ]
       }
     }
-  ].obs;
+  ];
   RxList<dynamic> filteredItems = <dynamic>[].obs;
+  RxList<dynamic> chekedValue = <dynamic>[
+    {"title": "Newest", "value": false},
+    {"title": "Oldest", "value": false},
+    {"title": "Price (Low to High)", "value": false},
+    {"title": "Price (High to Low)", "value": false},
+    {"title": "Best Selling", "value": false},
+  ].obs;
+  RxBool isChecked = false.obs;
+  void showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+            height: 300,
+            width: double.maxFinite,
+            padding: EdgeInsets.all(16.0),
+            child: Obx(() => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: chekedValue.length,
+                          itemBuilder: (context, index) {
+                            return BottomSheetCheckbox(
+                                ischecked: chekedValue[index]['value'],
+                                title: chekedValue[index]['title'],
+                                index: index);
+                          }),
+                    )
+                  ],
+                )));
+      },
+    );
+  }
+
+  BottomSheetCheckbox(
+      {required bool ischecked, required String title, required int index}) {
+    return CheckboxListTile(
+      title: Text(title),
+      value: ischecked,
+      onChanged: (bool? value) {
+        updateCheckedValues(value ?? false, index);
+      },
+    );
+  }
+
+  void updateCheckedValues(bool value, int index) {
+    for (int i = 0; i < chekedValue.length; i++) {
+      if (i == index) {
+        chekedValue[i]['value'] = value;
+      } else {
+        chekedValue[i]['value'] = false;
+      }
+    }
+    // if (value == true) {
+
+    // } else {
+    //   isChecked(false);
+    // }
+
+    chekedValue.refresh();
+    if (chekedValue[0]['value'] == true) {
+      isChecked(true);
+      print(
+          "Is chekced Value : ${isChecked.value} CheckedValueOfIndex0 : ${chekedValue[0]['value']}. Performing sorting.....");
+      sortAndCopyToFiltered();
+    } else {
+      isChecked(false);
+    }
+    print(chekedValue);
+  }
+
+  void sortAndCopyToFiltered() {
+    // Clear the filteredItems list
+    filteredItems.clear();
+
+    // Create a copy of itemList
+    List<dynamic> sortedList = List.from(itemList);
+
+    // Sort the copy based on date_created with empty or null values placed last
+    sortedList.sort((a, b) {
+      if (a["date_created"] == null || a["date_created"].isEmpty) {
+        return 1; // Place empty or null values at the end
+      } else if (b["date_created"] == null || b["date_created"].isEmpty) {
+        return -1; // Place empty or null values at the end
+      } else {
+        return DateTime.parse(a["date_created"])
+            .compareTo(DateTime.parse(b["date_created"]));
+      }
+    });
+
+    // Add the sorted items to filteredItems
+    filteredItems.addAll(sortedList);
+
+    // Refresh the filteredItems list
+    filteredItems.refresh();
+
+    // Print the filteredItems for debugging
+    print(filteredItems);
+  }
+
   @override
   void onInit() {
     super.onInit();
+    isChecked(false);
   }
 
   @override

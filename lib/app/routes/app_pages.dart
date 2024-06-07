@@ -44,12 +44,13 @@ class AppPages {
     GetPage(
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
-      binding: HomeBinding(),
+      // binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.ACCOUNTSCREEN,
-      page: () => const AccountscreenView(),
-      binding: HomeBinding(),
-    ),
+        name: _Paths.ACCOUNTSCREEN,
+        page: () => const AccountscreenView(),
+        transition: Transition.noTransition
+        // binding: HomeBinding(),
+        ),
   ];
 }
