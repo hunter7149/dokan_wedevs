@@ -1,4 +1,5 @@
 class AppUrl {
-  static String signup = "wp/v2/users/register";
-  static String userLogin = 'jwt-auth/v1/token';
+  static String signout = "wp/v2/users/register";
+  static String userLogin = 'public/api/login';
+  static String productList = 'public/api/fg-with-stock';
 }

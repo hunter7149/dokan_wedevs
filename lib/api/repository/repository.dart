@@ -5,15 +5,17 @@ import '../service/prefrences.dart';
 
 class Repository extends Providers {
   // /-------------------------User related api-------------------------///
-  Future<dynamic> requestSignUp({required Map<String, dynamic> map}) async =>
+  Future<dynamic> requestSignOut({required Map<String, dynamic> map}) async =>
       await commonApiCall(
-              endPoint: AppUrl.signup, method: Method.POST, map: map)
+              endPoint: AppUrl.signout, method: Method.POST, map: map)
           .then((value) => value);
 
   Future<dynamic> requestLogin({required Map<String, dynamic> map}) async =>
-      await commonApiCallwithContentTypeChanged(
-          endPoint: AppUrl.userLogin +
-              "?username=${map['username']}&password=${map['password']}",
-          method: Method.POST,
-          map: {}).then((value) => value);
+      await commonApiCall(
+              endPoint: AppUrl.userLogin, method: Method.POST, map: map)
+          .then((value) => value);
+  Future<dynamic> getProductList({required Map<String, dynamic> map}) async =>
+      await tokenBaseApi(
+              endPoint: AppUrl.productList, method: Method.GET, map: map)
+          .then((value) => value);
 }

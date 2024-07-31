@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ZoomTapAnimation(
           onTap: () {
-            Get.find<DashboardController>().showBottomSheet(context);
+            // Get.find<DashboardController>().showBottomSheet(context);
           },
           child: Container(
             height: 60,

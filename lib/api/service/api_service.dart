@@ -5,12 +5,11 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 
 enum Method { POST, GET, PUT, DELETE, PATCH }
 
-// const BASE_URL = 'http://192.168.10.204:8090/dp/';
 const BASE_URL =
 //LOCAL//
     kDebugMode
-        ? 'https://apptest.dokandemo.com/wp-json/'
-        : 'https://apptest.dokandemo.com/wp-json/';
+        ? 'https://demo.limerickbd.com/backend/'
+        : 'https://demo.limerickbd.com/backend/';
 
 //LIVE//
 // 'http://182.160.114.100:7171/dp/';

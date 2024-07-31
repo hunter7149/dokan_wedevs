@@ -26,7 +26,7 @@ class LoginscreenController extends GetxController {
       try {
         isLogingIn(true);
         await Repository().requestLogin(map: {
-          "username": "${email.text}",
+          "email": "${email.text}",
           "password": "${password.text}"
         }).then((value) {
           if (value != null || value != {}) {
@@ -35,8 +35,8 @@ class LoginscreenController extends GetxController {
                 key: Pref.token,
                 value: value['token'],
               );
-              Pref.writeData(key: Pref.USER_ID, value: value['user_email']);
-              Pref.writeData(key: Pref.userName, value: value['user_nicename']);
+              Pref.writeData(key: Pref.USER_ID, value: value['data']['id']);
+              Pref.writeData(key: Pref.userName, value: value['data']['name']);
               Get.offNamed(Routes.HOME);
               isLogingIn(false);
             }

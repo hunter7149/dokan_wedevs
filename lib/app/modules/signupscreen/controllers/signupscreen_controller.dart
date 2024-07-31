@@ -51,7 +51,7 @@ class SignupscreenController extends GetxController {
     };
     isSignUpLoading(true);
     try {
-      await Repository().requestSignUp(map: customBody).then((value) {
+      await Repository().requestSignOut(map: customBody).then((value) {
         if (value != null) {
           print(value);
 
