@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: ZoomTapAnimation(
           onTap: () {
-            // Get.find<DashboardController>().showBottomSheet(context);
+            Get.find<DashboardController>().requestProducts();
           },
           child: Container(
             height: 60,
@@ -38,7 +38,7 @@ class HomeView extends GetView<HomeController> {
                     colors: [Colors.pink.shade400, Colors.orange.shade400])),
             child: Center(
               child: Icon(
-                Icons.search,
+                Icons.refresh,
                 color: Colors.white,
                 size: 30,
               ),

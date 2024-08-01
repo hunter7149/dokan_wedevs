@@ -222,61 +222,6 @@ class DashboardView extends GetView<DashboardController> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Container(
-                    width: double.maxFinite,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade900,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10))),
-                          child: Icon(Icons.remove),
-                        ),
-                        Container(
-                            height: 30,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 10),
-                            // padding:
-                            //     EdgeInsets.symmetric(
-                            //         horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.grey
-                                  .shade200, // Set the background color to white
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(5)), // Apply curved corners
-                            ),
-                            child: TextFormField(
-                              // autofocus: true,
-                              // focusNode: searchFocusNode,
-                              decoration: InputDecoration(
-                                hintStyle:
-                                    TextStyle(color: Colors.grey.shade400),
-                                hintText: "Search", // Add placeholder text
-                                border: InputBorder
-                                    .none, // Hide the default TextField border
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 15.0,
-                                    vertical: 10.0), // Padding
-                              ),
-                              controller: controller.searchword,
-                            )),
-                        Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              color: Colors.grey.shade900,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(10),
-                                  bottomRight: Radius.circular(10))),
-                          child: Icon(Icons.add),
-                        )
-                      ], // Assuming you have a function for star rating
-                    ),
-                  )
                 ],
               ),
             ),
