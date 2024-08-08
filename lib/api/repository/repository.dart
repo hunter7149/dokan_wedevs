@@ -5,10 +5,10 @@ import '../service/prefrences.dart';
 
 class Repository extends Providers {
   // /-------------------------User related api-------------------------///
-  Future<dynamic> requestSignOut({required Map<String, dynamic> map}) async =>
-      await commonApiCall(
-              endPoint: AppUrl.signout, method: Method.POST, map: map)
-          .then((value) => value);
+  Future<dynamic> requestSignOut() async => await tokenBaseApi(
+      endPoint: AppUrl.userLogout,
+      method: Method.POST,
+      map: {}).then((value) => value);
 
   Future<dynamic> requestLogin({required Map<String, dynamic> map}) async =>
       await commonApiCall(

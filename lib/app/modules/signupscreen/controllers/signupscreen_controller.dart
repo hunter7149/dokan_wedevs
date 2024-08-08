@@ -39,36 +39,7 @@ class SignupscreenController extends GetxController {
       CustomWidget.errorMessage(
           title: "Opps!", message: "Confirm password don't match");
     } else {
-      requestSignUp();
-    }
-  }
-
-  requestSignUp() async {
-    dynamic customBody = {
-      "username": name.text,
-      "email": email.text,
-      "password": confirmPassword.text
-    };
-    isSignUpLoading(true);
-    try {
-      await Repository().requestSignOut(map: customBody).then((value) {
-        if (value != null) {
-          print(value);
-
-          if (value['message'].toString().contains("uccessful")) {
-            isSignUpLoading(false);
-            Get.toNamed(Routes.LOGINSCREEN);
-            CustomWidget.successMessage(
-                title: "Wow!", message: "${value['message']}");
-          }
-        } else {
-          CustomWidget.errorMessage(title: "Opps!", message: "Sign up failed");
-          isSignUpLoading(false);
-        }
-      });
-    } on Exception catch (e) {
-      CustomWidget.errorMessage(title: "Opps!", message: "Sign up failed");
-      isSignUpLoading(false);
+      // requestSignUp();
     }
   }
 

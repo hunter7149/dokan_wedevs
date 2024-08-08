@@ -1,5 +1,5 @@
 class AppUrl {
-  static String signout = "wp/v2/users/register";
   static String userLogin = 'public/api/login';
+  static String userLogout = 'public/api/logout';
   static String productList = 'public/api/fg-with-stock';
 }

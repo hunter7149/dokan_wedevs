@@ -33,7 +33,8 @@ abstract class Providers implements CallBack {
       {required String endPoint,
       required Method method,
       required Map<String, dynamic> map}) async {
-    String token = Pref.readData(key: Pref.token);
+    print(Pref.readData(key: Pref.token));
+    String token = await Pref.readData(key: Pref.token);
     print(token);
 
     ///Adding some value in recieved map
