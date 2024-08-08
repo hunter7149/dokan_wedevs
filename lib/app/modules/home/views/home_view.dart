@@ -1,7 +1,9 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:dokan/app/modules/home/controllers/dashboard_controller.dart';
 import 'package:dokan/app/modules/home/views/accountscreen_view.dart';
+import 'package:dokan/app/modules/home/views/cartscreen_view.dart';
 import 'package:dokan/app/modules/home/views/dashboard_view.dart';
+import 'package:dokan/app/modules/home/views/underdev_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,7 +23,12 @@ class HomeView extends GetView<HomeController> {
           width: MediaQuery.of(context).size.width,
           child: PageView(
             controller: controller.pagecontroller,
-            children: [DashboardView(), AccountscreenView()],
+            children: [
+              DashboardView(),
+              UnderdevView(),
+              CartscreenView(),
+              AccountscreenView(),
+            ],
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

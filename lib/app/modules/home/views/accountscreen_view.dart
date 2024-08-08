@@ -1,3 +1,4 @@
+import 'package:dokan/api/service/prefrences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,16 +22,26 @@ class AccountscreenView extends GetView<AccountscreenController> {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: Colors.grey.shade800,
+                  color: Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(100)),
               child: Icon(
                 CupertinoIcons.person,
-                size: 80,
+                size: 100,
                 color: Colors.blue.shade500,
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
+            ),
+            Text(
+              "${Pref.readData(key: Pref.userName)}",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade700,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 30,
             ),
             ZoomTapAnimation(
               onTap: () {

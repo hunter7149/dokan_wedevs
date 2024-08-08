@@ -39,7 +39,7 @@ class LoginscreenController extends GetxController {
               Pref.writeData(key: Pref.userName, value: value['data']['name']);
 
               Get.offNamed(Routes.HOME);
-              print("${Pref.readData(key: Pref.token)}");
+              // print("${Pref.readData(key: Pref.token)}");
               isLogingIn(false);
             }
           } else {

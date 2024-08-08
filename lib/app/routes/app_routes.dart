@@ -9,6 +9,8 @@ abstract class Routes {
   static const SIGNUPSCREEN = _Paths.SIGNUPSCREEN;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const ACCOUNTSCREEN = _Paths.ACCOUNTSCREEN;
+  static const CARTSCREEN = _Paths.CARTSCREEN;
+  static const UNDERDEV = _Paths.UNDERDEV;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const SIGNUPSCREEN = '/signupscreen';
   static const DASHBOARD = '/dashboard';
   static const ACCOUNTSCREEN = '/accountscreen';
+  static const CARTSCREEN = '/cartscreen';
+  static const UNDERDEV = '/underdev';
 }

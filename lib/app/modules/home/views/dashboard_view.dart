@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:dokan/app/data/customWidgets/starCount.dart';
+import 'package:dokan/app/modules/home/controllers/cartscreen_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -112,10 +113,10 @@ class DashboardView extends GetView<DashboardController> {
                           child: GridView.builder(
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 0.57,
+                              childAspectRatio: 0.54,
                               crossAxisCount: _getCrossAxisCount(context),
-                              mainAxisSpacing: 16,
-                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
                             ),
                             itemCount: controller.isChecked.value
                                 ? controller.filteredItems.length
@@ -135,7 +136,40 @@ class DashboardView extends GetView<DashboardController> {
   }
 
   Widget buildGridItem(Map<String, dynamic> item) {
-    TextEditingController quantity = TextEditingController();
+    TextEditingController quantity = TextEditingController(text: "1");
+    increaseItem() {
+      int temporaryQtry = int.parse(quantity.text);
+      temporaryQtry++;
+      quantity.text = temporaryQtry.toString();
+    }
+
+    ;
+    decreaseItem() {
+      int temporaryQtry = int.parse(quantity.text);
+      if (temporaryQtry < 2) {
+        temporaryQtry = 1;
+      } else {
+        temporaryQtry--;
+        quantity.text = temporaryQtry.toString();
+      }
+    }
+
+    ;
+
+    addItem() {
+      dynamic customItem = {
+        "name": item['name'],
+        "Stock": "${item['stockQty']}",
+        "quantity": quantity.text,
+      };
+      Get.find<CartscreenController>().cartItems.add(customItem);
+      Get.snackbar("Succes", "${item['name']} was added to cart",
+          backgroundColor: Colors.green.withOpacity(0.4),
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 1),
+          animationDuration: Duration(seconds: 0));
+    }
+
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -151,7 +185,7 @@ class DashboardView extends GetView<DashboardController> {
       child: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
@@ -207,7 +241,7 @@ class DashboardView extends GetView<DashboardController> {
                     ),
                   ),
                   Text(
-                    "Stock: ${item['stockQty'] ?? "N/A"} BDT",
+                    "Stock: ${item['stockQty'].toString() ?? "N/A"}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
@@ -215,11 +249,103 @@ class DashboardView extends GetView<DashboardController> {
                     ),
                   ),
                   Text(
-                    "Master Pack,: ${item['pack_size'] ?? "N/A"} BDT",
+                    "Master Pack: ${item['pack_size'] ?? "N/A"}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ZoomTapAnimation(
+                          onTap: () {
+                            decreaseItem();
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade800,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10))),
+                            child: Center(
+                                child: Icon(
+                              Icons.remove,
+                              color: Colors.white,
+                            )),
+                          ),
+                        ),
+                        Flexible(
+                          child: Container(
+                            height: 30,
+                            decoration:
+                                BoxDecoration(color: Colors.grey.shade300),
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              textAlignVertical: TextAlignVertical.top,
+                              textAlign: TextAlign.center,
+                              controller: quantity,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(bottom: 15)),
+                            ),
+                          ),
+                        ),
+                        ZoomTapAnimation(
+                          onTap: () {
+                            increaseItem();
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade800,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10))),
+                            child: Center(
+                                child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            )),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.shopping_bag,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ZoomTapAnimation(
+                          onTap: () {
+                            addItem();
+                          },
+                          child: Text(
+                            "Add to cart",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

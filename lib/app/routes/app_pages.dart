@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 
-// import '../modules/accountscreen/bindings/accountscreen_binding.dart';
-import '../modules/home/views/accountscreen_view.dart';
-// import '../modules/dashboard/bindings/dashboard_binding.dart';
-import '../modules/home/views/dashboard_view.dart';
+import '../modules/cartscreen/bindings/cartscreen_binding.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/accountscreen_view.dart';
+import '../modules/home/views/cartscreen_view.dart';
+import '../modules/home/views/dashboard_view.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/loginscreen/bindings/loginscreen_binding.dart';
 import '../modules/loginscreen/views/loginscreen_view.dart';
@@ -12,6 +12,11 @@ import '../modules/signupscreen/bindings/signupscreen_binding.dart';
 import '../modules/signupscreen/views/signupscreen_view.dart';
 import '../modules/splashscreen/bindings/splashscreen_binding.dart';
 import '../modules/splashscreen/views/splashscreen_view.dart';
+import '../modules/underdev/bindings/underdev_binding.dart';
+import '../modules/home/views/underdev_view.dart';
+
+// import '../modules/accountscreen/bindings/accountscreen_binding.dart';
+// import '../modules/dashboard/bindings/dashboard_binding.dart';
 
 part 'app_routes.dart';
 
@@ -52,5 +57,15 @@ class AppPages {
         transition: Transition.noTransition
         // binding: HomeBinding(),
         ),
+    GetPage(
+      name: _Paths.CARTSCREEN,
+      page: () => const CartscreenView(),
+      binding: CartscreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.UNDERDEV,
+      page: () => const UnderdevView(),
+      binding: UnderdevBinding(),
+    ),
   ];
 }
