@@ -7,7 +7,7 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage().initStorage;
+  await GetStorage("dokan_app_data").initStorage;
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

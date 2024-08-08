@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 class Pref {
   static final box = GetStorage('dokan_app_data');
 
-  static var token = 'token_limertick';
+  static var token = 'token_limertick_123';
   static var USER_ID = 'user_id_dokan';
   static var userName = 'username_dokan';
 

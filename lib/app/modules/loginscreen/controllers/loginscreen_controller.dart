@@ -28,7 +28,7 @@ class LoginscreenController extends GetxController {
         await Repository().requestLogin(map: {
           "email": "${email.text}",
           "password": "${password.text}"
-        }).then((value) {
+        }).then((value) async {
           if (value != null || value != {}) {
             if (value['token'].toString().isNotEmpty) {
               Pref.writeData(
